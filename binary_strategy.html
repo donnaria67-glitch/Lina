@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binary Crypto Trading Strategy</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  background: #0a0a0a;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  color: #ffcc00;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #00ffcc;
+  margin-top: 25px;
+  border-bottom: 1px solid #00ffcc;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+ol, ul { margin-left: 20px; line-height: 1.8; }
+p { margin-top: 10px; }
+
+.btn {
+  background: linear-gradient(135deg, #ff4b5c, #ff8a5c);
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin: 6px 6px 6px 0;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+
+/* Falling coins */
+.coin {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: -50px;
+  cursor: pointer;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0.7; }
+}
+
+/* Tooltip for coin click */
+.tooltip {
+  position: absolute;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  font-size: 14px;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+<h1>Binary Crypto Trading Strategy</h1>
+
+<div class="strategy-content">
+<h2>Key Factors for Binary Trading</h2>
+<ol>
+<li><strong>Asset selection:</strong>
+<ul><li>BTC, ETH, XRP, LTC</li></ul></li>
+<li><strong>Time frame:</strong> Short, Medium, Long-term</li>
+<li><strong>Price direction:</strong> Call, Put, Neutral</li>
+<li><strong>Strike price:</strong> Near current market</li>
+<li><strong>Expiry time:</strong> Align with analysis</li>
+<li><strong>Payout percentage:</strong> 70%-90%</li>
+<li><strong>Risk management:</strong> Budget, limit positions, stop-loss</li>
+<li><strong>Market analysis:</strong> Technical & Fundamental</li>
+<li><strong>Broker selection:</strong> Reputable</li>
+<li><strong>Regulations:</strong> Compliance</li>
+<li><strong>Leverage:</strong> Caution</li>
+<li><strong>Trading strategy:</strong> Consistency & discipline</li>
+</ol>
+
+<a class="btn" href="index.html" rel="noopener">Back to Home</a>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const coinImages = [
+  {img:'bitcoin.png', name:'Bitcoin', symbol:'BTC'},
+  {img:'ethereum.png', name:'Ethereum', symbol:'ETH'},
+  {img:'ripple.png', name:'Ripple', symbol:'XRP'},
+  {img:'litecoin.png', name:'Litecoin', symbol:'LTC'}
+];
+
+const numberOfCoins = 30;
+const tooltip = document.getElementById('tooltip');
+
+for(let i=0;i<numberOfCoins;i++){
+  const coin = document.createElement('div');
+  coin.classList.add('coin');
+  const size = Math.random()*40 + 20;
+  coin.style.width = `${size}px`;
+  coin.style.height = `${size}px`;
+  coin.style.left = `${Math.random() * window.innerWidth}px`;
+  coin.style.animationDuration = `${Math.random()*10 + 5}s`;
+  const randomCoin = coinImages[Math.floor(Math.random()*coinImages.length)];
+  coin.style.backgroundImage = `url(${randomCoin.img})`;
+  
+  coin.addEventListener('click', (e)=>{
+    tooltip.style.display = 'block';
+    tooltip.style.left = e.pageX + 'px';
+    tooltip.style.top = e.pageY + 'px';
+    tooltip.innerHTML = `${randomCoin.name} (${randomCoin.symbol})`;
+    setTimeout(()=>{ tooltip.style.display='none'; }, 2000);
+  });
+
+  document.body.appendChild(coin);
+}
+</script>
+</body>
+</html>
